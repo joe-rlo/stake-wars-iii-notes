@@ -25,8 +25,9 @@ If you need to update the staking pool key:
 ```curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' https://rpc.shardnet.near.org | jq -c ".result.prev_epoch_kickout[] | select(.account_id | contains (\"POOLID\"))" | jq .reason```
 
 ## Make sure cron is set for ping each epoch (epochs are short on shardnet)
-```NEAR_ENV=shardnet
-0 * * * * near call POOLID.factory.shardnet.near ping '{}' --accountId ACCOUNTID.shardnet.near --gas=300000000000000 >> /root/output.txt
+```
+NEAR_ENV=shardnet
+0 */2 * * * near call POOLID.factory.shardnet.near ping '{}' --accountId ACCOUNTID.shardnet.near --gas=300000000000000 >> /root/output.txt
 ```
 
 ## Misc Commands
